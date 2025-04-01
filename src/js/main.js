@@ -19,7 +19,7 @@ inputLetter.addEventListener("input", (e) => {
     })
 })
 
-const numeroV1 = document.getElementById("v1");
+// const numeroV1 = document.getElementById("v1");
 // const numeroV2 = document.getElementById("v2");
 // const numeroV3 = document.getElementById("v3");
 // const numeroV4 = document.getElementById("v4");
@@ -38,17 +38,19 @@ nextNumberButton.forEach((button) => {
             numeroVentanilla.innerText = letter + currentNumber;
         }
 
-        const synth = window.speechSynthesis
-        SpeakNumberAndWindow(synth, "Ventanilla " + ventanillaAActualizar + " Número " + numeroVentanilla.innerText);
+        Speak("Ventanilla " + ventanillaAActualizar + " Número " + numeroVentanilla.innerText);
 
         currentNumber++;
     });
 });
 
-function SpeakNumberAndWindow(synth, textToSpeech) {
+function Speak(textToSpeech) {
     let text = textToSpeech
     const utterThis = new SpeechSynthesisUtterance(text)
     utterThis.lang = "es"
 
-    synth.speak(utterThis)
+    window.speechSynthesis.speak(utterThis)
 }
+
+/*-----*/
+
