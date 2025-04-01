@@ -4,32 +4,44 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
-    <script src= "js/main.js"></script>
     <link rel="stylesheet" href="css/index.css">
 </head>
 <body>
     <section class="ventanillas">
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 1</h2>
-            <h2 class="numeroTexto">A001</h2>
+            <h2 id="v1" class="numeroTexto">A000</h2>
         </div>
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 2</h2>
-            <h2 class="numeroTexto">A002</h2>
+            <h2 id="v2" class="numeroTexto">A000</h2>
         </div>
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 3</h2>
-            <h2 class="numeroTexto">A003</h2>
+            <h2 id="v3" class="numeroTexto">A000</h2>
         </div>
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 4</h2>
-            <h2 class="numeroTexto">A004</h2>
+            <h2 id="v4" class="numeroTexto">A000</h2>
         </div>
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 5</h2>
-            <h2 class="numeroTexto">A005</h2>
+            <h2 id="v5" class="numeroTexto">A000</h2>
         </div> 
     </section>
+    <section class="nextNumber">
+        <button class="nextNumberButton" id="1">Next Number Ventanilla 1</button>
+        <button class="nextNumberButton" id="2">Next Number Ventanilla 2</button>
+        <button class="nextNumberButton" id="3">Next Number Ventanilla 3</button>
+        <button class="nextNumberButton" id="4">Next Number Ventanilla 4</button>
+        <button class="nextNumberButton" id="5">Next Number Ventanilla 5</button>
+    </section>
+    <br>
+    <section class="selectLetter">
+        <label for="selectLetterInput">Select Letter</label>
+        <input type="text" id="selectLetterInput">
+    </section>
     
+    <script src= "js/main.js"></script>
 </body>
 </html>

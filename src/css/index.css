@@ -17,8 +17,10 @@ body {
     padding: 10px;
     display: flex;
     flex-direction: row;
-    justify-content: space-around;
+    justify-content: space-between;
     align-items: center;
+    padding-left: 100px;
+    padding-right: 100px;
 }
 
 .ventanillaTexto {
@@ -28,4 +30,47 @@ body {
 .numeroTexto {
     color: black;
     font-size: 48px;
+}
+
+button {
+    height: 100px;
+    width: 300px;
+    background-color: orange;
+    border: 2px solid cyan;
+    color: white;
+    font-size: large;
+}
+
+button:hover {
+    background-color: darkorange;
+}
+
+button:active {
+    background-color: darkgoldenrod;
+}
+
+.nextNumber {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+.selectLetter {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    
+}
+
+#selectLetterInput {
+    height: 30px;
+    width: 100px;
+    border: 3px solid black;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 30px;
+    text-align: center;
 }
