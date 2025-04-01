@@ -1,0 +1,31 @@
+* {
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+.ventanillas {
+    display: flex;
+    flex-direction: column;
+}
+
+.ventanilla {
+    background-color: rgba(255, 128, 0, .5);
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+    align-items: center;
+}
+
+.ventanillaTexto {
+    color: white;
+}
+
+.numeroTexto {
+    color: black;
+    font-size: 48px;
+}
