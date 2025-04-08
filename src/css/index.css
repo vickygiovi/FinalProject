@@ -50,7 +50,7 @@ body {
     font-size: 72px;
 }
 
-button {
+button:not(.smallButton) {
     height: 100px;
     width: 100%;
     background-color: orange;
@@ -75,7 +75,7 @@ button:active {
     align-items: center;
 }
 
-.selectLetter, .numberOfWindows {
+.selectLetter, .numberOfWindows, .windowsletterornumber, .range {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -83,7 +83,7 @@ button:active {
     
 }
 
-#selectLetterInput, #numberWindowsInput {
+#selectLetterInput, #numberWindowsInput, #letterornumberInput, #rangeInputFrom, #rangeInputTo{
     height: 30px;
     width: 100px;
     border: 3px solid black;
@@ -96,4 +96,13 @@ button:active {
 
 audio {
     display: none;
+}
+
+.smallButton {
+    height: 100px;
+    width: 100px;
+    background-color: orange;
+    border: 3px solid black;
+    color: white;
+    font-size: large;
 }
