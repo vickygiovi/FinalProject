@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="css/index.css">
 </head>
+
 <body>
     <section class="ventanillas">
         <div class="ventanilla">
@@ -28,7 +30,7 @@
             <h2 class="ventanillaTexto">Ventanilla 5</h2>
             <h2 id="v5" class="numeroTexto">A000</h2>
         </div>
-        
+
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 6</h2>
             <h2 id="v6" class="numeroTexto">A000</h2>
@@ -50,7 +52,7 @@
             <h2 id="v10" class="numeroTexto">A000</h2>
         </div>
     </section>
-    
+
     <section class="nextNumber">
         <button class="nextNumberButton" id="1">Next Number Ventanilla 1</button>
         <button class="nextNumberButton" id="2">Next Number Ventanilla 2</button>
@@ -76,7 +78,7 @@
 
     <section class="numberOfWindows">
         <label for="numberWindowsInput">Number of Windows</label>
-        <input type="text" id="numberWindowsInput">
+        <input type="number" id="numberWindowsInput" name="numberWindowsInput" min="1" max="10" />
     </section>
 
     <br>
@@ -107,7 +109,64 @@
     </section>
 
     <br>
-    
-    <script src= "js/main.js"></script>
+
+    <section class="chooseService">
+        <label for="chooseSvc">Change Active Service</label>
+        <select name="select" id="chooseSvc">
+            <!-- <option value="value1">A</option>
+            <option value="value2" selected>B</option>
+            <option value="value3">C</option> -->
+        </select>
+    </section>
+
+    <br>
+
+    <section class="services">
+        <label for="service">Name of service</label>
+        <input type="text" id="service">
+        <label for="letterService">Letter of service</label>
+        <input type="text" id="letterService">
+        <label for="fromRangeService">Number from</label>
+        <input type="text" id="fromRangeService">
+        <label for="toRangeService">Number to</label>
+        <input type="text" id="toRangeService">
+        <br>
+        <button id="applyServices" class="smallButton">Apply</button>
+    </section>
+
+    <br>
+
+    <section id="servicesList">
+        <h2 id="serviciosPlaceholder">No hay servicios</h2>
+        <table id="tableExternalServicios">
+            <thead>
+                <tr>
+                    <th>Service</td>
+                    <th>Letter</td>
+                    <th>Number From</td>
+                    <th>Number To</td>
+                </tr>
+            </thead>
+            <tbody id="tablaServicios">
+                <!-- <tr>
+                    <td>Service Example</td>
+                    <td>A</td>
+                    <td>1</td>
+                    <td>999</td>
+                </tr>
+                <tr>
+                    <td>Service Example</td>
+                    <td>A</td>
+                    <td>1</td>
+                    <td>999</td>
+                </tr> -->
+            </tbody>
+        </table>
+    </section>
+
+    <br>
+
+    <script src="js/main.js"></script>
 </body>
+
 </html>

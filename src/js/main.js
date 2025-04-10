@@ -6,10 +6,94 @@ let windowLetter = false;
 let rangeFrom = 1;
 let rangeTo = 999;
 let currentNumber = rangeFrom;
+let services = [];
 
 /*----------*/
 
+
+
+const applySvc = document.getElementById("applyServices")
+const nameSvc = document.getElementById("service");
+const letterSvc = document.getElementById("letterService")
+const fromRangeSvc = document.getElementById("fromRangeService")
+const toRangeSvc = document.getElementById("toRangeService")
+const servicesList = document.getElementById("servicesList")
+const tablaServicios = document.getElementById("tablaServicios");
+const tableExternalServicios = document.getElementById("tableExternalServicios");
+const serviciosPlaceholder = document.getElementById("serviciosPlaceholder");
+const chooseSvc = document.getElementById("chooseSvc");
+
+const ventanillas = document.querySelectorAll(".ventanilla");
 const nextNumberButton = document.querySelectorAll(".nextNumberButton");
+
+function UpdateServicesList() {
+    chooseSvc.innerHTML = "";
+    let servicesHTML = services.map((serv) => `<option value=${serv.letter}>${serv.letter}</option>`);
+    servicesHTML.forEach((svc) => chooseSvc.innerHTML += svc);
+
+}
+
+UpdateServicesList()
+
+if (services.length == 0) {
+    tableExternalServicios.hidden = true;
+    serviciosPlaceholder.hidden = false;
+} else {
+    tableExternalServicios.hidden = false;
+    serviciosPlaceholder.hidden = true;
+}
+
+applySvc.addEventListener("click", () => {
+    let name = nameSvc.value;
+    let letter = letterSvc.value.charAt(0).toUpperCase();
+    let from = parseInt(fromRangeSvc.value);
+    let to = parseInt(toRangeSvc.value);
+    // const letterInput = e.target.value.charAt(0).toUpperCase()
+    // if (letterInput != "" && esLetra(letterInput)) {
+    //     letter = letterInput
+    // }
+    if (ValidateNewService(name, letter, from, to)) {
+        let objectService = { name, letter, from, to, current: from }
+        services.push(objectService);
+
+        if (services.length == 0) {
+            tableExternalServicios.hidden = true;
+            serviciosPlaceholder.hidden = false;
+        } else {
+            tableExternalServicios.hidden = false;
+            serviciosPlaceholder.hidden = true;
+        }
+
+        tablaServicios.innerHTML += `
+        <tr>
+            <td>${name}</td>
+            <td>${letter}</td>
+            <td>${from}</td>
+            <td>${to}</td>
+        </tr>
+    `
+
+    }
+
+
+
+    window.scrollTo(0, document.body.scrollHeight);
+
+    UpdateServicesList();
+
+})
+
+function ValidateNewService(name, letter, from, to) {
+    return name !== ""
+        && letter !== ""
+        && esLetra(letter)
+        && from < to
+        && from > 0
+        && to < 1000
+        && Number.isInteger(from)
+        && Number.isInteger(to);
+}
+
 const ventanillasContainer = document.querySelector(".ventanillas");
 const ventanillaTexto = document.querySelectorAll(".ventanillaTexto");
 
@@ -21,8 +105,6 @@ const esLetra = (caracter) => {
     let ascii = caracter.toUpperCase().charCodeAt(0);
     return ascii > 64 && ascii < 91;
 };
-
-const ventanillas = document.querySelectorAll(".ventanilla");
 
 const inputLetter = document.querySelector("#selectLetterInput")
 const inputNumberWindows = document.querySelector("#numberWindowsInput")
@@ -114,8 +196,33 @@ inputLetter.addEventListener("input", (e) => {
 })
 
 inputNumberWindows.addEventListener("input", (e) => {
-    numberOfWindows = e.target.value;
+    let inputNumberWindowsValue = parseInt(e.target.value);
+    if (ValidateNumberWindows(inputNumberWindowsValue)) {
+        numberOfWindows = inputNumberWindowsValue;
+        UpdateNumberWindows();
+    }
 })
+
+function UpdateNumberWindows() {
+    let numberWindows = numberOfWindows;
+
+    for (let i = 0; i < numberWindows; i++) {
+        nextNumberButton[i].style.display = "block";     
+    }
+
+    for (let i = numberWindows; i < 10; i++) {
+        ventanillas[i].style.display = "none";
+        nextNumberButton[i].style.display = "none";
+    }
+}
+
+UpdateNumberWindows()
+
+function ValidateNumberWindows(numberWindows) {
+    return Number.isInteger(numberWindows)
+        && numberWindows >= 1
+        && numberWindows <= 10;
+}
 
 // const numeroV1 = document.getElementById("v1");
 // const numeroV2 = document.getElementById("v2");
