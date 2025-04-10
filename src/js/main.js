@@ -22,6 +22,7 @@ const tablaServicios = document.getElementById("tablaServicios");
 const tableExternalServicios = document.getElementById("tableExternalServicios");
 const serviciosPlaceholder = document.getElementById("serviciosPlaceholder");
 const chooseSvc = document.getElementById("chooseSvc");
+const letterService = document.getElementById("letterService");
 
 const ventanillas = document.querySelectorAll(".ventanilla");
 const nextNumberButton = document.querySelectorAll(".nextNumberButton");
