@@ -6,96 +6,94 @@ let windowLetter = false;
 let rangeFrom = 1;
 let rangeTo = 999;
 let currentNumber = rangeFrom;
-let services = [];
+// let services = [];
 
 /*----------*/
 
 
 
-const applySvc = document.getElementById("applyServices")
-const nameSvc = document.getElementById("service");
-const letterSvc = document.getElementById("letterService")
-const fromRangeSvc = document.getElementById("fromRangeService")
-const toRangeSvc = document.getElementById("toRangeService")
-const servicesList = document.getElementById("servicesList")
-const tablaServicios = document.getElementById("tablaServicios");
-const tableExternalServicios = document.getElementById("tableExternalServicios");
-const serviciosPlaceholder = document.getElementById("serviciosPlaceholder");
-const chooseSvc = document.getElementById("chooseSvc");
-const letterService = document.getElementById("letterService");
+// const applySvc = document.getElementById("applyServices")
+// const nameSvc = document.getElementById("service");
+// const letterSvc = document.getElementById("letterService")
+// const fromRangeSvc = document.getElementById("fromRangeService")
+// const toRangeSvc = document.getElementById("toRangeService")
+// const servicesList = document.getElementById("servicesList")
+// const tablaServicios = document.getElementById("tablaServicios");
+// const tableExternalServicios = document.getElementById("tableExternalServicios");
+// const serviciosPlaceholder = document.getElementById("serviciosPlaceholder");
+// const chooseSvc = document.getElementById("chooseSvc");
+// const letterService = document.getElementById("letterService");
 
 const ventanillas = document.querySelectorAll(".ventanilla");
 const nextNumberButton = document.querySelectorAll(".nextNumberButton");
 
 function UpdateServicesList() {
-    chooseSvc.innerHTML = "";
-    let servicesHTML = services.map((serv) => `<option value=${serv.letter}>${serv.letter}</option>`);
-    servicesHTML.forEach((svc) => chooseSvc.innerHTML += svc);
+    // chooseSvc.innerHTML = "";
+    // let servicesHTML = services.map((serv) => `<option value=${serv.letter}>${serv.letter}</option>`);
+    // servicesHTML.forEach((svc) => chooseSvc.innerHTML += svc);
 
 }
 
 UpdateServicesList()
 
-if (services.length == 0) {
-    tableExternalServicios.hidden = true;
-    serviciosPlaceholder.hidden = false;
-} else {
-    tableExternalServicios.hidden = false;
-    serviciosPlaceholder.hidden = true;
-}
-
-applySvc.addEventListener("click", () => {
-    let name = nameSvc.value;
-    let letter = letterSvc.value.charAt(0).toUpperCase();
-    let from = parseInt(fromRangeSvc.value);
-    let to = parseInt(toRangeSvc.value);
-    // const letterInput = e.target.value.charAt(0).toUpperCase()
-    // if (letterInput != "" && esLetra(letterInput)) {
-    //     letter = letterInput
+function ServicesPlaceholder() {
+    // if (services.length == 0) {
+    //     tableExternalServicios.hidden = true;
+    //     serviciosPlaceholder.hidden = false;
+    // } else {
+    //     tableExternalServicios.hidden = false;
+    //     serviciosPlaceholder.hidden = true;
     // }
-    if (ValidateNewService(name, letter, from, to)) {
-        let objectService = { name, letter, from, to, current: from }
-        services.push(objectService);
-
-        if (services.length == 0) {
-            tableExternalServicios.hidden = true;
-            serviciosPlaceholder.hidden = false;
-        } else {
-            tableExternalServicios.hidden = false;
-            serviciosPlaceholder.hidden = true;
-        }
-
-        tablaServicios.innerHTML += `
-        <tr>
-            <td>${name}</td>
-            <td>${letter}</td>
-            <td>${from}</td>
-            <td>${to}</td>
-        </tr>
-    `
-
-    }
-
-
-
-    window.scrollTo(0, document.body.scrollHeight);
-
-    UpdateServicesList();
-
-})
-
-function ValidateNewService(name, letter, from, to) {
-    return name !== ""
-        && letter !== ""
-        && esLetra(letter)
-        && from < to
-        && from > 0
-        && to < 1000
-        && Number.isInteger(from)
-        && Number.isInteger(to);
 }
 
-const ventanillasContainer = document.querySelector(".ventanillas");
+ServicesPlaceholder();
+
+// applySvc.addEventListener("click", () => {
+//     let name = nameSvc.value;
+//     let letter = letterSvc.value.charAt(0).toUpperCase();
+//     let from = parseInt(fromRangeSvc.value);
+//     let to = parseInt(toRangeSvc.value);
+//     // const letterInput = e.target.value.charAt(0).toUpperCase()
+//     // if (letterInput != "" && esLetra(letterInput)) {
+//     //     letter = letterInput
+//     // }
+//     if (ValidateNewService(name, letter, from, to)) {
+//         let objectService = { name, letter, from, to, current: from }
+//         services.push(objectService);
+
+//         ServicesPlaceholder();
+
+//         tablaServicios.innerHTML += `
+//         <tr>
+//             <td>${name}</td>
+//             <td>${letter}</td>
+//             <td>${from}</td>
+//             <td>${to}</td>
+//         </tr>
+//     `
+
+//     }
+
+
+
+//     window.scrollTo(0, document.body.scrollHeight);
+
+//     UpdateServicesList();
+
+// })
+
+// function ValidateNewService(name, letter, from, to) {
+//     return name !== ""
+//         && letter !== ""
+//         && esLetra(letter)
+//         && from < to
+//         && from > 0
+//         && to < 1000
+//         && Number.isInteger(from)
+//         && Number.isInteger(to);
+// }
+
+// const ventanillasContainer = document.querySelector(".ventanillas");
 const ventanillaTexto = document.querySelectorAll(".ventanillaTexto");
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -378,7 +376,7 @@ const rangeFromElem = document.getElementById("rangeInputFrom")
 const rangeToElem = document.getElementById("rangeInputTo")
 const buttonApplyRange = document.getElementById("applyrange");
 
-rangeFromElem.addEventListener("input", (e) => {
+rangeFromElem.addEventListener("input", () => {
     // let valor = parseInt(e.target.value)
     // if (Number.isInteger(valor)) {
     //     rangeFrom = valor;
@@ -388,7 +386,7 @@ rangeFromElem.addEventListener("input", (e) => {
     // }
 })
 
-rangeToElem.addEventListener("input", (e) => {
+rangeToElem.addEventListener("input", () => {
     // let valor = parseInt(e.target.value)
     // if (Number.isInteger(valor)) {
     //     rangeTo = valor;
