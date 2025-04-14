@@ -1,10 +1,12 @@
 // Utils
 
+// The character is a letter?
 export const esLetra = (caracter) => {
     let ascii = caracter.toUpperCase().charCodeAt(0);
     return ascii > 64 && ascii < 91;
 };
 
+// Speak with Speech API
 export function Speak(textToSpeech) {
     let text = textToSpeech
     const utterThis = new SpeechSynthesisUtterance(text)
@@ -13,6 +15,7 @@ export function Speak(textToSpeech) {
     window.speechSynthesis.speak(utterThis)
 }
 
+// Create an oscillator with Audio API
 export function Beep(frequency) {
     const context = new AudioContext(); //allows access to webaudioapi
     let oscillator = context.createOscillator(); //creates oscillator

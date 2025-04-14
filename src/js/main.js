@@ -11,9 +11,15 @@ import { Validation } from "./validations.js";
 
 let numberOfWindows = 5;
 let letter = "A";
+
+// Windows are letters or numbers?
 let windowLetter = false;
+
+// Range of numbers
 let rangeFrom = 1;
 let rangeTo = 999;
+
+// Current number
 let currentNumber = rangeFrom;
 
 /*----------*/
@@ -39,6 +45,7 @@ class InitDOM {
 
     }
 
+    // Show or hide windows depending on the numberOfWindows variable
     UpdateNumberWindows() {
         let numberWindows = numberOfWindows;
     
@@ -52,6 +59,7 @@ class InitDOM {
         }
     }
 
+    // Controlling if the windows are letters or numbers
     LoadWindows() {
 
         if (windowLetter) {
@@ -115,6 +123,7 @@ class InitDOM {
         }
     }
 
+    // Controlling if the windows are letters or numbers
     LoadButtons() {
 
         if (windowLetter) {
@@ -201,6 +210,7 @@ class Event {
 
             const validate = new Validation();
         
+            // Update initial value of numbers
             let valorFrom = parseInt(rangeFromElem.value);
             if (validate.ParseIntCustom(valorFrom)) {
                 rangeFrom = valorFrom;
@@ -209,6 +219,7 @@ class Event {
                 }
             }
         
+            // Update final value of numbers, and return to the initial value again
             let valorTo = parseInt(rangeToElem.value);
             if (validate.ParseIntCustom(valorTo)) {
                 rangeTo = valorTo;
@@ -217,6 +228,7 @@ class Event {
                 }
             }
         
+            // Controlling errors
             if (rangeFrom >= rangeTo) {
                 currentNumber = 1;
                 rangeFrom = 1;
@@ -227,6 +239,8 @@ class Event {
     }
 
     registertoggleLetterOrNumber() {
+
+        // Handling if the windows are numbers or letters
         toggleLetterOrNumber.addEventListener("click", () => {
             windowLetter = !windowLetter;
         
@@ -243,6 +257,8 @@ class Event {
             }
         
             const numeroTextoVentanilla = document.querySelectorAll(".numeroTexto");
+
+            // Updating the letter before the numbers of the windows (type of service)
             numeroTextoVentanilla.forEach((elem) => {
                 elem.innerText = letter + elem.innerText.substring(1, 4)
             })
@@ -250,6 +266,8 @@ class Event {
     }
 
     registerinputNumberWindows() {
+
+        // Handling number of windows
         inputNumberWindows.addEventListener("input", (e) => {
             const validate = new Validation();
             let inputNumberWindowsValue = parseInt(e.target.value);
@@ -263,9 +281,11 @@ class Event {
     registernextNumberButton() {
         nextNumberButton.forEach((button) => {
             button.addEventListener("click", (event) => {
+                // Obtain id
                 let targetId = event.target.id;
                 let ventanillaAActualizar;
         
+                // Obtain window to update
                 if (windowLetter) {
                     switch (targetId) {
                         case "1": ventanillaAActualizar = "A"; break;
@@ -284,13 +304,18 @@ class Event {
                     ventanillaAActualizar = targetId;
                 }
         
+                // Obtain window
                 const numeroVentanilla = document.getElementById("v" + targetId);
                 const estadoVentanilla = numeroVentanilla.parentNode;
+
+                // Handling styles
                 ventanillas.forEach((vent) => {
                     vent.classList.remove("ventanillaActual")
                 })
                 estadoVentanilla.classList.add("ventanillaActual")
                 estadoVentanilla.style.display = "flex"
+
+                // Handling zeros before the number
                 if (currentNumber.toString().length === 1) {
                     numeroVentanilla.innerText = letter + "00" + currentNumber;
                 } else if (currentNumber.toString().length === 2) {
@@ -299,12 +324,15 @@ class Event {
                     numeroVentanilla.innerText = letter + currentNumber;
                 }
         
+                // Speak with Speech API
                 Speak("Ventanilla " + ventanillaAActualizar + " Número " + letter + currentNumber);
         
+                // Create an oscillator with Audio API
                 Beep(2000)
         
                 currentNumber++;
         
+                // Return to initial value
                 if (currentNumber === rangeTo + 1) {
                     currentNumber = rangeFrom;
                 }
