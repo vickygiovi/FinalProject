@@ -12,9 +12,15 @@
     
     <title>Number Tracking</title>
     <link rel="stylesheet" href="css/index.css">
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin="" />
 </head>
 
 <body>
+    <div id="hospitalName">
+        <h1 class="center"></h1>
+    </div>
+
     <section class="ventanillas">
         <div class="ventanilla">
             <h2 class="ventanillaTexto">Ventanilla 1</h2>
@@ -157,7 +163,32 @@
 
     <br>
 
+    <div class="weatherDiv">
+        <h2 class="center">Weather</h2>
+        <br>
+        <p class="center" id="weather"></p>
+        <p class="center" id="sensacion"></p>
+        <p class="center" id="min"></p>
+        <p class="center" id="max"></p>
+    </div>
+
+    
+
+    <br>
+
+    <h2 class="center">Map</h2>
+
+    <br>
+
+    <div class="center" id="map"></div>
+
+
+    <p class="center" id="cr"></p>
+
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
     <script src="js/main.js" type="module"></script>
+
 </body>
 
 </html>

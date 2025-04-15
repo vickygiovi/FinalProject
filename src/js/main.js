@@ -4,23 +4,74 @@ import { esLetra } from "./utils.js";
 import { Speak } from "./utils.js";
 import { Beep } from "./utils.js";
 import { Validation } from "./validations.js";
+import { Weather } from "./weather.js";
+import { Map } from "./map.js";
+import { mapConfig } from "./mapConfig.js";
 
 /*----------*/
 
-// State of application
+// // State of application
 
-let numberOfWindows = 5;
-let letter = "A";
+// let numberOfWindows = 5;
+// let letter = "A";
 
-// Windows are letters or numbers?
-let windowLetter = false;
+// // Windows are letters or numbers?
+// let windowLetter = false;
 
-// Range of numbers
-let rangeFrom = 1;
-let rangeTo = 999;
+// // Range of numbers
+// let rangeFrom = 1;
+// let rangeTo = 999;
 
-// Current number
-let currentNumber = rangeFrom;
+// // Current number
+// let currentNumber = rangeFrom;
+
+// localStorage.setItem("state", "hola");
+
+let state = [];
+
+if (localStorage.getItem("state")) {
+    state = JSON.parse(localStorage.getItem("state"));
+} else {
+    
+    state = [
+        {
+            numberOfWindows: 5,
+            letter: "A",
+            windowLetter: false,
+            rangeFrom: 1,
+            rangeTo: 999,
+            currentNumber: 1,
+            businessName: "Giovanni's hospital",
+            copyright: "Copyright - Giovanni Canavesi - All rights reserved - 2025"
+        },
+        {
+            numberOfWindows: 5,
+            letter: "A",
+            windowLetter: false,
+            rangeFrom: 1,
+            rangeTo: 999,
+            currentNumber: 1,
+            businessName: "Victoria's hospital",
+            copyright: "Copyright - Victoria Canavesi - All rights reserved - 2025"
+        },
+        {
+            numberOfWindows: 5,
+            letter: "A",
+            windowLetter: false,
+            rangeFrom: 1,
+            rangeTo: 999,
+            currentNumber: 1,
+            businessName: "Victorio's hospital",
+            copyright: "Copyright - Victorio Canavesi - All rights reserved - 2025"
+        }
+    ]
+}
+
+const h1 = document.querySelector("h1")
+h1.textContent = state[0].businessName;
+
+const cr = document.getElementById("cr");
+cr.textContent = state[0].copyright;
 
 /*----------*/
 
@@ -35,10 +86,36 @@ const toggleLetterOrNumber = document.getElementById("toggleLetterOrNumber");
 const rangeFromElem = document.getElementById("rangeInputFrom")
 const rangeToElem = document.getElementById("rangeInputTo")
 const buttonApplyRange = document.getElementById("applyrange");
+const weatherElem = document.getElementById("weather");
+const weatherElemSensacion = document.getElementById("sensacion");
+const weatherElemMin = document.getElementById("min");
+const weatherElemMax = document.getElementById("max");
+{/* <p class="center" id="weather"></p>
+    <p class="center" id="sensacion"></p>
+    <p class="center" id="min"></p>
+    <p class="center" id="max"></p> */}
+
 
 /*----------*/
 
 // Classes
+
+let mapConfigParsed = JSON.parse(mapConfig);
+
+const map = new Map(
+    mapConfigParsed.map.latitud,
+    mapConfigParsed.map.longitud,
+    mapConfigParsed.map.zoom,
+    mapConfigParsed.map.layer,
+    mapConfigParsed.map.attribution,
+    mapConfigParsed.map.locationPopup
+);
+
+map.chargeMap();
+
+const weather = new Weather(weatherElem, weatherElemSensacion, weatherElemMin, weatherElemMax);
+
+weather.populateWeather();
 
 class InitDOM {
     constructor() {
@@ -47,7 +124,7 @@ class InitDOM {
 
     // Show or hide windows depending on the numberOfWindows variable
     UpdateNumberWindows() {
-        let numberWindows = numberOfWindows;
+        let numberWindows = state[0].numberOfWindows;
     
         for (let i = 0; i < numberWindows; i++) {
             nextNumberButton[i].style.display = "block";     
@@ -62,61 +139,61 @@ class InitDOM {
     // Controlling if the windows are letters or numbers
     LoadWindows() {
 
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[0].innerText = "Ventanilla A"
         } else {
             ventanillaTexto[0].innerText = "Ventanilla 1"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[1].innerText = "Ventanilla B"
         } else {
             ventanillaTexto[1].innerText = "Ventanilla 2"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[2].innerText = "Ventanilla C"
         } else {
             ventanillaTexto[2].innerText = "Ventanilla 3"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[3].innerText = "Ventanilla D"
         } else {
             ventanillaTexto[3].innerText = "Ventanilla 4"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[4].innerText = "Ventanilla E"
         } else {
             ventanillaTexto[4].innerText = "Ventanilla 5"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[5].innerText = "Ventanilla F"
         } else {
             ventanillaTexto[5].innerText = "Ventanilla 6"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[6].innerText = "Ventanilla G"
         } else {
             ventanillaTexto[6].innerText = "Ventanilla 7"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[7].innerText = "Ventanilla H"
         } else {
             ventanillaTexto[7].innerText = "Ventanilla 8"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[8].innerText = "Ventanilla I"
         } else {
             ventanillaTexto[8].innerText = "Ventanilla 9"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             ventanillaTexto[9].innerText = "Ventanilla J"
         } else {
             ventanillaTexto[9].innerText = "Ventanilla 10"
@@ -126,61 +203,61 @@ class InitDOM {
     // Controlling if the windows are letters or numbers
     LoadButtons() {
 
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[0].innerText = "Next Number Ventanilla A"
         } else {
             nextNumberButton[0].innerText = "Next Number Ventanilla 1"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[1].innerText = "Next Number Ventanilla B"
         } else {
             nextNumberButton[1].innerText = "Next Number Ventanilla 2"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[2].innerText = "Next Number Ventanilla C"
         } else {
             nextNumberButton[2].innerText = "Next Number Ventanilla 3"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[3].innerText = "Next Number Ventanilla D"
         } else {
             nextNumberButton[3].innerText = "Next Number Ventanilla 4"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[4].innerText = "Next Number Ventanilla E"
         } else {
             nextNumberButton[4].innerText = "Next Number Ventanilla 5"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[5].innerText = "Next Number Ventanilla F"
         } else {
             nextNumberButton[5].innerText = "Next Number Ventanilla 6"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[6].innerText = "Next Number Ventanilla G"
         } else {
             nextNumberButton[6].innerText = "Next Number Ventanilla 7"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[7].innerText = "Next Number Ventanilla H"
         } else {
             nextNumberButton[7].innerText = "Next Number Ventanilla 8"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[8].innerText = "Next Number Ventanilla I"
         } else {
             nextNumberButton[8].innerText = "Next Number Ventanilla 9"
         }
     
-        if (windowLetter) {
+        if (state[0].windowLetter) {
             nextNumberButton[9].innerText = "Next Number Ventanilla J"
         } else {
             nextNumberButton[9].innerText = "Next Number Ventanilla 10"
@@ -213,27 +290,29 @@ class Event {
             // Update initial value of numbers
             let valorFrom = parseInt(rangeFromElem.value);
             if (validate.ParseIntCustom(valorFrom)) {
-                rangeFrom = valorFrom;
-                if (currentNumber < rangeFrom || currentNumber > rangeTo) {
-                    currentNumber = rangeFrom;
+                state[0].rangeFrom = valorFrom;
+                if (state[0].currentNumber < state[0].rangeFrom || state[0].currentNumber > state[0].rangeTo) {
+                    state[0].currentNumber = state[0].rangeFrom;
                 }
             }
         
             // Update final value of numbers, and return to the initial value again
             let valorTo = parseInt(rangeToElem.value);
             if (validate.ParseIntCustom(valorTo)) {
-                rangeTo = valorTo;
-                if (currentNumber < rangeFrom || currentNumber > rangeTo) {
-                    currentNumber = rangeFrom;
+                state[0].rangeTo = valorTo;
+                if (state[0].currentNumber < state[0].rangeFrom || state[0].currentNumber > state[0].rangeTo) {
+                    state[0].currentNumber = state[0].rangeFrom;
                 }
             }
         
             // Controlling errors
-            if (rangeFrom >= rangeTo) {
-                currentNumber = 1;
-                rangeFrom = 1;
-                rangeTo = 999;
+            if (state[0].rangeFrom >= state[0].rangeTo) {
+                state[0].currentNumber = 1;
+                state[0].rangeFrom = 1;
+                state[0].rangeTo = 999;
             }
+
+            
         
         })
     }
@@ -242,9 +321,44 @@ class Event {
 
         // Handling if the windows are numbers or letters
         toggleLetterOrNumber.addEventListener("click", () => {
-            windowLetter = !windowLetter;
+            state[0].windowLetter = !state[0].windowLetter;
         
             start.init();
+
+            let stateSave = [
+                {
+                    numberOfWindows: state[0].numberOfWindows,
+                    letter: state[0].letter,
+                    windowLetter: state[0].windowLetter,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Giovanni's hospital",
+                    copyright: "Copyright - Giovanni Canavesi - All rights reserved - 2025"
+                },
+                {
+                    numberOfWindows: 5,
+                    letter: "A",
+                    windowLetter: false,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Victoria's hospital",
+                    copyright: "Copyright - Victoria Canavesi - All rights reserved - 2025"
+                },
+                {
+                    numberOfWindows: 5,
+                    letter: "A",
+                    windowLetter: false,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Victorio's hospital",
+                    copyright: "Copyright - Victorio Canavesi - All rights reserved - 2025"
+                }
+            ]
+
+            localStorage.setItem("state", JSON.stringify(stateSave))
         
         })
     }
@@ -253,15 +367,50 @@ class Event {
         inputLetter.addEventListener("input", (e) => {
             const letterInput = e.target.value.charAt(0).toUpperCase()
             if (letterInput != "" && esLetra(letterInput)) {
-                letter = letterInput
+                state[0].letter = letterInput
             }
         
             const numeroTextoVentanilla = document.querySelectorAll(".numeroTexto");
 
             // Updating the letter before the numbers of the windows (type of service)
             numeroTextoVentanilla.forEach((elem) => {
-                elem.innerText = letter + elem.innerText.substring(1, 4)
+                elem.innerText = state[0].letter + elem.innerText.substring(1, 4)
             })
+
+            let stateSave = [
+                {
+                    numberOfWindows: state[0].numberOfWindows,
+                    letter: state[0].letter,
+                    windowLetter: state[0].windowLetter,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Giovanni's hospital",
+                    copyright: "Copyright - Giovanni Canavesi - All rights reserved - 2025"
+                },
+                {
+                    numberOfWindows: 5,
+                    letter: "A",
+                    windowLetter: false,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Victoria's hospital",
+                    copyright: "Copyright - Victoria Canavesi - All rights reserved - 2025"
+                },
+                {
+                    numberOfWindows: 5,
+                    letter: "A",
+                    windowLetter: false,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Victorio's hospital",
+                    copyright: "Copyright - Victorio Canavesi - All rights reserved - 2025"
+                }
+            ]
+
+            localStorage.setItem("state", JSON.stringify(stateSave))
         })
     }
 
@@ -272,9 +421,44 @@ class Event {
             const validate = new Validation();
             let inputNumberWindowsValue = parseInt(e.target.value);
             if (validate.ValidateNumberWindows(inputNumberWindowsValue)) {
-                numberOfWindows = inputNumberWindowsValue;
+                state[0].numberOfWindows = inputNumberWindowsValue;
                 start.init();
             }
+
+            let stateSave = [
+                {
+                    numberOfWindows: state[0].numberOfWindows,
+                    letter: state[0].letter,
+                    windowLetter: state[0].windowLetter,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Giovanni's hospital",
+                    copyright: "Copyright - Giovanni Canavesi - All rights reserved - 2025"
+                },
+                {
+                    numberOfWindows: 5,
+                    letter: "A",
+                    windowLetter: false,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Victoria's hospital",
+                    copyright: "Copyright - Victoria Canavesi - All rights reserved - 2025"
+                },
+                {
+                    numberOfWindows: 5,
+                    letter: "A",
+                    windowLetter: false,
+                    rangeFrom: 1,
+                    rangeTo: 999,
+                    currentNumber: 1,
+                    businessName: "Victorio's hospital",
+                    copyright: "Copyright - Victorio Canavesi - All rights reserved - 2025"
+                }
+            ]
+
+            localStorage.setItem("state", JSON.stringify(stateSave))
         })
     }
 
@@ -286,7 +470,7 @@ class Event {
                 let ventanillaAActualizar;
         
                 // Obtain window to update
-                if (windowLetter) {
+                if (state[0].windowLetter) {
                     switch (targetId) {
                         case "1": ventanillaAActualizar = "A"; break;
                         case "2": ventanillaAActualizar = "B"; break;
@@ -316,25 +500,25 @@ class Event {
                 estadoVentanilla.style.display = "flex"
 
                 // Handling zeros before the number
-                if (currentNumber.toString().length === 1) {
-                    numeroVentanilla.innerText = letter + "00" + currentNumber;
-                } else if (currentNumber.toString().length === 2) {
-                    numeroVentanilla.innerText = letter + "0" + currentNumber;
-                } else if (currentNumber.toString().length === 3) {
-                    numeroVentanilla.innerText = letter + currentNumber;
+                if (state[0].currentNumber.toString().length === 1) {
+                    numeroVentanilla.innerText = state[0].letter + "00" + state[0].currentNumber;
+                } else if (state[0].currentNumber.toString().length === 2) {
+                    numeroVentanilla.innerText = state[0].letter + "0" + state[0].currentNumber;
+                } else if (state[0].currentNumber.toString().length === 3) {
+                    numeroVentanilla.innerText = state[0].letter + state[0].currentNumber;
                 }
         
                 // Speak with Speech API
-                Speak("Ventanilla " + ventanillaAActualizar + " Número " + letter + currentNumber);
+                Speak("Ventanilla " + ventanillaAActualizar + " Número " + state[0].letter + state[0].currentNumber);
         
                 // Create an oscillator with Audio API
                 Beep(2000)
         
-                currentNumber++;
+                state[0].currentNumber++;
         
                 // Return to initial value
-                if (currentNumber === rangeTo + 1) {
-                    currentNumber = rangeFrom;
+                if (state[0].currentNumber === state[0].rangeTo + 1) {
+                    state[0].currentNumber = state[0].rangeFrom;
                 }
             });
         });

@@ -7,6 +7,60 @@ body {
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 
+@keyframes weather {
+    0%   {rotate: 0deg;}
+    50% {rotate: 360deg;}
+    100% {rotate: 360deg;}
+}
+
+.weatherDiv {
+    background-color: skyblue;
+    padding: 20px;
+    width: 200px;
+    margin: 0 auto;
+    animation: weather;
+    animation-duration: 2s;
+    animation-iteration-count: infinite;
+}
+
+@keyframes hospital {
+    0%   {background-color: orange;}
+    100% {background-color: skyblue;}
+}
+
+#hospitalName {
+    background-color: skyblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    animation: hospital;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate;
+}
+
+#cr {
+    background-color: skyblue;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    animation: hospital;
+    animation-iteration-count: infinite;
+    animation-duration: 1s;
+    animation-direction: alternate;
+}
+
+.center {
+    text-align: center;
+}
+
+/* MAP */
+
+#map {
+    height: 400px;
+    width: auto;
+}
+
+/*-----*/
+
 .ventanillas {
     display: grid;
     grid-template-rows: repeat(5, 1fr);
@@ -50,6 +104,8 @@ body {
     font-size: 72px;
 }
 
+
+
 button:not(.smallButton) {
     height: 100px;
     width: 100%;
@@ -57,10 +113,25 @@ button:not(.smallButton) {
     border: 3px solid black;
     color: white;
     font-size: large;
+    animation: buttonAnimation2;
+    animation-duration: 0.1s;
+}
+
+@keyframes buttonAnimation {
+    0%   {transform: scale(1);}
+    100% {transform: scale(0.8);}
+}
+
+@keyframes buttonAnimation2 {
+    0%   {transform: scale(0.8);}
+    100% {transform: scale(1);}
 }
 
 button:hover {
     background-color: darkorange;
+    animation: buttonAnimation;
+    animation-duration: 0.3s;
+    transform: scale(0.8);
 }
 
 button:active {
